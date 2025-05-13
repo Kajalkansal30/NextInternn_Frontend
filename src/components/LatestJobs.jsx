@@ -16,7 +16,7 @@ const LatestJobs = () => {
         >
             {/* Section Heading */}
             <h1 className="text-3xl md:text-4xl font-bold text-center">
-                <span className="text-[#5ce1e6]">Latest & Top</span> Internships Opening
+                <span className="text-[#337edf]">Latest & Top</span> Internships Opening
             </h1>
 
             {/* Internship Listings */}
