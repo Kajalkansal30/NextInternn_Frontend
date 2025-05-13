@@ -102,8 +102,6 @@ function App() {
     if (currentUser) {
       dispatch(setUser(currentUser))
     }
-    // Clear filters on page load (refresh)
-    dispatch(clearFilters())
   }, [dispatch])
 
   return (
