@@ -49,22 +49,6 @@ const Home = () => {
           <HeroSection />
         </motion.section>
 
-        {/* Category Carousel with staggered animation */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="py-16 bg-white"
-        >
-          <div className="container mx-auto px-6">
-            <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
-              Explore <span className="text-blue-600">Categories</span>
-            </h2>
-            <CategoryCaousel />
-          </div>
-        </motion.section>
-
         {/* Latest Jobs Section with fade-in on scroll */}
         <motion.section
           initial={{ opacity: 0 }}
@@ -74,9 +58,6 @@ const Home = () => {
           className="py-16 bg-gray-50"
         >
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
-              Latest <span className="text-blue-600">Opportunities</span>
-            </h2>
             <LatestJobs />
           </div>
         </motion.section>
