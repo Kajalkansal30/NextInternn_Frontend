@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
-import Navbar from '../shared/Navbar'
-import ApplicantsTable from './ApplicantsTable'
-import axios from 'axios'
-import { useParams } from 'react-router-dom'
-import { APPLICATION_API_END_POINT } from '@/utils/constant'
-import { useDispatch, useSelector } from 'react-redux'
-import { setAllApplicants } from '@/redux/applicationSlice'
-import store from '@/redux/store'
+import React, { useEffect, useState } from 'react';
+import Navbar from '../shared/Navbar';
+import ApplicantsTable from './ApplicantsTable';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { APPLICATION_API_END_POINT } from '@/utils/constant';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAllApplicants } from '@/redux/applicationSlice';
 import { motion } from "framer-motion";
 
 const headerVariants = {
@@ -27,17 +26,33 @@ const Applicants = () => {
     const params = useParams();
     const dispatch = useDispatch();
     const { applicants } = useSelector(store => store.application);
+    const [loading, setLoading] = useState(true); // Added loading state
+    const [error, setError] = useState(null); // Added error state
+
     useEffect(() => {
         const fetchAllApplicants = async () => {
             try {
                 const res = await axios.get(`${APPLICATION_API_END_POINT}/${params.id}/applicants`, { withCredentials: true });
-                dispatch(setAllApplicants(res.data.job.applications));
+                const applications = Array.isArray(res.data.job.applications) ? res.data.job.applications : [];
+                dispatch(setAllApplicants(applications));
             } catch (error) {
+                setError('Failed to fetch applicants. Please try again later.');
                 console.log(error);
+            } finally {
+                setLoading(false); // Set loading to false after the fetch
             }
-        }
+        };
         fetchAllApplicants();
-    }, []);
+    }, [params.id, dispatch]);
+
+    if (loading) {
+        return <div>Loading...</div>; // Show loading text while fetching data
+    }
+
+    if (error) {
+        return <div className="text-red-500">{error}</div>; // Show error if fetching fails
+    }
+
     return (
         <div className="min-h-screen bg-gray-50">
             <Navbar />
@@ -66,4 +81,4 @@ const Applicants = () => {
     );
 };
 
-export default Applicants
+export default Applicants;
