@@ -62,7 +62,7 @@ const Navbar = () => {
                 >
                     <img src={logo} alt="SkillBridge Logo" className='h-7 sm:h-8 object-contain' />
                     <span className='ml-2 text-lg sm:text-xl font-semibold bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text text-transparent'>
-                        SkillBridge
+                        NextIntern
                     </span>
                 </motion.div>
 
